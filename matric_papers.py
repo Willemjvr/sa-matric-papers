@@ -91,7 +91,7 @@ def strip_tags(s: str) -> str:
 
 def parse_year_page(page_url: str, label: str = "") -> list[dict]:
     raw = http_get(page_url).decode("utf-8", errors="replace")
-    year_match = re.search(r"(\d{4})", page_url.rsplit("/", 1)[-1]) or re.search(r"(\d{4})", label)
+    year_match = re.search(r"(\d{4})", label) or re.search(r"(\d{4})", page_url.rsplit("/", 1)[-1])
     year = int(year_match.group(1)) if year_match else 0
     lo = (page_url + " " + label).lower()
     if re.search(r"\bexemplar", lo):
